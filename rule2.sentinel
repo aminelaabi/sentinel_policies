@@ -1,0 +1,10 @@
+some_foo_bar_fn = func() {
+    return 42;
+}
+
+
+
+main = rule {
+    some_foo_bar_fn() is 42
+}
+
