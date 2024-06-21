@@ -1,33 +1,9 @@
-import "tfplan/v2" as tfplan
+import "rule1" as rule1
+import "rule2" as rule2
 
-ressource_created_or_updated = func(rc) {
-    return rc.change.actions contains "create" or 
-           rc.change.actions contains "update"
-}
-
-ressource_is_of_type = func(rc, rc_type) {
-    return rc.type is rc_type
-}
-
-ressource_must_contain_tag = func(rc) {
-    if "tag" in keys(rc.change.after) {
-        return rc.change.after.tag is not empty
-    }
-    if "tag" in keys(rc.change.after_unknown) {
-        return rc.change.after_unknown.tag is not empty
-    }
-    return false
-}
-
-
-new_ressource_must_contain_tag = func() {
-    new_ressource = filter tfplan.resource_changes as _, rc {
-        ressource_created_or_updated (rc) and
-        ressource_must_contain_tag(rc)
-    }
-    return new_ressource is not empty
-}
 
 main = rule {
-    new_ressource_must_contain_tag()
+    rule1.main and
+    rule2.main
 }
+
