@@ -1,0 +1,6 @@
+import "rule1" as rule1
+
+
+main = rule {
+    rule1.main
+}
