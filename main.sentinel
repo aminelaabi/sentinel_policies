@@ -1,3 +1,7 @@
+import "module" "rule1" {
+    source = "rule1.sentinel"
+}
+
 import "rule1" as rule1
 
 
